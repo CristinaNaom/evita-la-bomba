@@ -1,0 +1,43 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  let caselle="";
+  let random = parseInt(Math.random() * 16);
+  let punti = 0;
+
+  for (let i = 0; i < 16; i++) {
+
+    if (i == random) {
+      caselle += "<li class='bomba'></li>";
+    }
+    else {
+      caselle += "<li class='rainbow'></li>";
+    }
+  }
+  document.querySelector("ul").innerHTML = caselle;
+
+  let scelta = document.querySelectorAll("li");
+
+  for (let i = 0; i < scelta.length; i++) {
+
+    scelta[i].onclick = function () {
+
+      if (this.classList.contains("bomba")) {
+        this.style.backgroundImage = "url(immagini/bomb.png)";
+        document.querySelector("#gioco span").classList.add("bloccaGioco");
+        punti++;
+        document.getElementById("fine").style.display = "block";
+        document.querySelector("#fine span").innerHTML = punti;
+      }
+      else {
+        this.style.backgroundImage = "url(immagini/rainbow.png)";
+        punti++;
+      }
+      let nuova = document.getElementById("new");
+      nuova.onclick = function () {
+        location.reload();
+      }
+    }
+  }
+
+});//DOMContentLoaded
